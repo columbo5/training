@@ -72,7 +72,7 @@ class Vector():
 
 v1 = Vector(1, 2)
 v2 = Vector(3, 4)
-v3 = v1 + v2
+v3 = v1 + v2  # test
 print(v3)
 #%%
 
@@ -95,3 +95,55 @@ matching(534)
 
 #%%
 tuple(str(123))
+
+#%%
+
+middle = slice(2, 5, 1)
+all = [1, 2, 3, 4, 5, 6, 7]
+print(all[middle])
+#%%
+import numpy as np
+fdl = np.array([
+    [1, 2],
+    [1, 2],
+    [1, 2],
+])
+
+fdl[..., 1]
+...
+#%%
+
+a = 10
+b = [1, a, 3]
+print("b", b)
+b[1] = 40
+print("b", b)
+print("a", a)
+#%%
+a: tuple = (1, 2)
+print(id(a))
+a *= 2
+print(a)
+print(id(a))
+
+#%%
+
+import bisect
+
+a: list = [1, 3, 5, 3, 6, 7]
+print(a)
+a.sort()
+print(a)
+bisect.insort(a, 2)
+print(a)
+#%%
+
+from array import array
+
+a: array = array("L", (i for i in range(int(1e8))))
+#%%
+a[10]
+
+b = (i for i in range(int(1e8)))
+
+c = list(b)
