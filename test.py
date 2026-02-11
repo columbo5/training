@@ -1,5 +1,5 @@
 
-# %% 
+
 
 a: int = 2
 
@@ -74,4 +74,24 @@ v1 = Vector(1, 2)
 v2 = Vector(3, 4)
 v3 = v1 + v2
 print(v3)
+#%%
 
+def matching(var: int):
+    match searching := [int(i) for i in tuple(str(var))]:
+        case list(test):
+            print("first")
+            print(test)
+        case 3 if True:
+            print("y")
+        case R"\d+" as other:
+            print(other)
+        case [5, *other]:
+            print("X")
+            print(other)
+        case _:
+            print("else", searching)
+
+matching(534)
+
+#%%
+tuple(str(123))
