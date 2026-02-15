@@ -147,3 +147,32 @@ a[10]
 b = (i for i in range(int(1e8)))
 
 c = list(b)
+#%%
+from array import array
+
+a = array("B", range(6))
+print(a)
+m1 = memoryview(a)
+m2 = m1.cast("B", (2, 3))
+print([i.tolist() for i in (m1, m2)])
+m2[0, 0] = 10
+print([i.tolist() for i in (m1, m2)])
+#%%
+d1 = {"a": 1, "b": 2, "c": 3}
+d2 = {"d": 4}
+d3 = d1 | d2
+print(d3)
+d1 |= d2
+print(d1)
+#%%
+
+t = [1, 2, 3, 4, 5, 6]
+t[-1:]
+#%%
+test = "abc"
+print(test[0])
+print(test[:1])
+#%%
+t = [1, 2, 3]
+print(t[0], t[:1])
+print(repr(t))
