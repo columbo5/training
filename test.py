@@ -176,3 +176,83 @@ print(test[:1])
 t = [1, 2, 3]
 print(t[0], t[:1])
 print(repr(t))
+#%%
+def testfunc():
+    pass
+
+testfunc.test = 1
+
+print(testfunc.test)
+print(testfunc.__dict__)
+#%%
+import functools
+
+
+def cache(func):
+    """cache function values"""
+    @functools.wraps(func)
+
+    def cache_wrapper(*args, **kwargs):
+        cache_key = args + tuple(kwargs.items())
+        if cache_key not in cache_wrapper.cache.keys():
+            cache_wrapper.cache[cache_key] = func(*args, **kwargs)
+
+        return cache_wrapper.cache[cache_key]
+
+    cache_wrapper.cache = dict()
+    return cache_wrapper
+
+# @cache
+@counter
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+    
+
+
+
+#%%
+# print(res)
+# print(fibonacci.cache)
+
+import timeit
+t1 = timeit.timeit("fibonacci(500)", globals=globals(), number=1)
+print(t1)
+#%%
+def fibonacci2(n):
+    print(f"Entering n{n}")
+    if n <= 1:
+        return n
+    else:
+        return fibonacci2(n-1) + fibonacci2(n-2)
+    #%%
+t2 = timeit.timeit("fibonacci2(500)", globals=globals(), number=1)
+#%%
+fibonacci.cache = dict()
+
+#%%
+fibonacci2(50)
+
+#%%
+import functools
+
+def counter(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        print(f"Function {func.__name__} has been called {wrapper.count} times")
+        return func(*args, **kwargs)
+    wrapper.count = 0
+    return wrapper
+
+#%%
+from functools import lru_cache
+
+@lru_cache
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
